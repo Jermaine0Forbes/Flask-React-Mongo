@@ -20,3 +20,6 @@ def user():
     
     users["foo"] = "bar"
     return users
+
+if __name__ == "__main__":
+    print('inside user routes')
