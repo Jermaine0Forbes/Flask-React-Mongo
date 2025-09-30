@@ -11,8 +11,6 @@ from .config.config import Config
 app = Flask(__name__)
 
 app.config.from_object(Config)
-# app.config.from_object('Config')
-# app.secret_key = app.config["SECRET_KEY"]
 app.secret_key = Config.SECRET_KEY
 
 app.register_blueprint(user_bp, url_prefix = "/user")
@@ -24,11 +22,7 @@ def hello_world():
 @app.route("/hello")
 def hello():
     name = request.args.get("name", "Flasks")
-    name =  app.config["SECRET_KEY"]
+    name =  app.config["DEBUG"]
     return f"Hello, {escape(name)}!"
-    # return f"Hello, {escape(name)}!"
 
 
-if __name__ == "__main__":
-    # app.run(debug=app.config["DEBUG"])
-    app.run(debug=Config.DEBUG)
