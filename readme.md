@@ -15,9 +15,9 @@ pip install python-dotenv
 ## Goals
 
 - ~~Need to turn on Debug for app~~
-- Need to install React
-- Need to make flask show react app
-- Need to install react router
+- ~~Need to install React~~
+- ~~Need to make flask show react app~~
+- Need to install react router and mui
 - Need to create home, login, and profile pages
 - Need to create make api request and validate it
 - Need to connect SQLAlchemy to app

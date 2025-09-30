@@ -1,4 +1,6 @@
 .env
 __pycache__ 
-app/__pycache__/
-app/config/__pycache__/
+/app/__pycache__/*
+app/config/__pycache__/*
+app/view/node_modules/*
+*.pyc
