@@ -4,7 +4,7 @@ from .blueprints.user_routes import user_bp
 from .config.config import Config
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="view/build", static_folder="view/build/static")
 
 app.config.from_object(Config)
 app.secret_key = Config.SECRET_KEY
@@ -13,8 +13,7 @@ app.register_blueprint(user_bp, url_prefix = "/user")
 
 @app.route("/", methods=['GET', 'POST'])
 def hello_world():
-    # return f"<p> Hello World, {Config.ENVIRONMENT}</p>"
-    return render_template('view/public/index.html')
+    return render_template('index.html')
 
 @app.route("/hello")
 def hello():
