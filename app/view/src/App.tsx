@@ -1,13 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import DefaultLayout from './layouts/DefaultLayout';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <div>Hello World</div>,
+     Component: DefaultLayout,
+     children: [
+       { index: true, Component: Home },
+       { path: 'profile', Component: Profile },
+       { path: 'login', Component: Login }
+     ]
   },
 ]);
 
