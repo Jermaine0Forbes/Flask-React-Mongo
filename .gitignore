@@ -4,3 +4,4 @@ __pycache__
 app/config/__pycache__/*
 app/view/node_modules/*
 *.pyc
+node_modules

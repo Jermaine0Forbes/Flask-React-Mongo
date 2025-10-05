@@ -6,10 +6,12 @@ import DefaultLayout from './layouts/DefaultLayout';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+// import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
      Component: DefaultLayout,
+    //  errorElement: <ErrorPage/>,
      children: [
        { index: true, Component: Home },
        { path: 'profile', Component: Profile },
