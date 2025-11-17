@@ -12,6 +12,25 @@ pip install python-dotenv
 
 ```
 
+## Activate the environment
+
+```
+.venv/Scripts/activate
+```
+
+## Run dev environment
+
+```
+## should run by default
+flask run
+
+## should run the hello.py file
+flask --app hello run
+
+## should run the hello.py file and add debug option
+flask --app hello run --debug
+```
+
 ## Goals
 
 - ~~Need to turn on Debug for app~~

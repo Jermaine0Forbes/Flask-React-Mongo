@@ -6,6 +6,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 // import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
      children: [
        { index: true, Component: Home },
        { path: 'profile', Component: Profile },
-       { path: 'login', Component: Login }
+       { path: 'login', Component: Login },
+       { path: 'signup', Component: Signup }
      ]
   },
 ]);

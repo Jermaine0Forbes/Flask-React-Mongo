@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Outlet,
     Link,
@@ -11,9 +11,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+// import Brightness7Icon from '@mui/icons-material/Brightness7';
+import ScienceIcon from '@mui/icons-material/Science';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
 
 export default function DefaultLayout() {
+
+    const [open, setOpen] = useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+    const toggleOpen = () => {
+        setOpen(!open);
+    }
+
 
     return (
         <Container
@@ -21,53 +37,55 @@ export default function DefaultLayout() {
             maxWidth="xl"
             id="layout-container"
         >
+
+                <Dialog onClose={handleClose} open={open}>
+                    <DialogTitle>Set backup account</DialogTitle>
+
+                </Dialog>
             <AppBar position="static" id="app-bar">
-                <Toolbar
-                    id="toolbar"
-                    component="section"
-                >
-                    <Grid 
+                <Grid
                     container
-                    >
-                     <Grid size={3}>
-                        
-                        <Brightness7Icon />    
-                    
-                    </Grid>   
-                     <Grid size={6}>
-                        <Stack
-                            direction={'row'}
-                            spacing={2}
-                            component="nav"
+                >
+                    <Grid size={3} className="app-bar-grid">
+                        <Box 
+                        id="logo-section"
                         >
-                            <Typography
-                                variant="h6"
-                                component={Link}
-                                to="/"
-                            >
-                                Home
+                            <ScienceIcon />
+                            <Typography 
+                            component={Link}
+                            to="/"
+                            variant='h5'>
+
+                                flaskRM
                             </Typography>
-                            <Typography
-                                variant="h6"
-                                component={Link}
-                                to="/login"
+
+                        </Box>
+                    </Grid>
+                    <Grid
+                        className="app-bar-grid"
+                        size={3}
+                        offset={6}
+                    >
+                        <Toolbar
+                            id="toolbar"
+                        >
+                            <Button
+                               onClick={toggleOpen}
+                               className="links"
                             >
                                 Login
-                            </Typography>
-                            <Typography
-                                variant="h6"
+                            </Button>
+
+                            <Button
+                            className="links"
                                 component={Link}
-                                to="/profile"
+                                to="/signup"
                             >
-                                Profile
-                            </Typography>
-                        </Stack>
-                        
-                    </Grid>   
-                     <Grid size={3}></Grid>   
-                        
-                    </Grid> 
-                </Toolbar>
+                                Signup
+                            </Button>
+                        </Toolbar>
+                    </Grid>
+                </Grid>
             </AppBar>
             <Outlet />
         </Container>

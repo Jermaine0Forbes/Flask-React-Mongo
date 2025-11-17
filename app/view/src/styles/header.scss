@@ -7,4 +7,29 @@ header {
             color: white;
         }
     }
+    .app-bar-grid {
+        &:first-child {
+            align-self: center;
+
+        }
+    }
+
+
+
+    #logo-section {
+        display:flex;
+        align-items:center;
+        margin-left: 1em;
+
+        svg {
+            font-size: 2em;
+        }
+    }
+
+    #toolbar {
+
+        .links {
+            color:white;
+        }
+    }
 }

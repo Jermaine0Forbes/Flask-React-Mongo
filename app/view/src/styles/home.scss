@@ -1,0 +1,68 @@
+@use '_var' as *;
+
+#home- {
+
+    &banner {
+
+        // text-align:center;
+        background-color: $blue;
+        color: white;
+        width: 100%;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .group {
+            text-align: center;
+
+            button {
+                background-color: white;
+            }
+        }
+
+        .title {
+            font-weight: 300;
+
+            &::first-letter {
+                text-transform: capitalize;
+            }
+
+
+        }
+
+        .subtitle {
+            margin-bottom: 1em;
+        }
+    }
+
+    &features {
+
+        min-height: 300px;
+        font-family:$font1;
+
+        .group  {
+            
+
+            &-container{
+                 padding: 2em 0;
+            }
+
+            p {
+                text-align:center;
+                text-indent:1em;
+            }
+        }
+
+        .icon {
+            text-align:center;
+            color:$blue;
+
+            svg {
+
+                font-size: 5em;
+
+            }
+        }
+    }
+}
