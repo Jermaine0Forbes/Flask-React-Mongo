@@ -37,9 +37,11 @@ flask --app hello run --debug
 - ~~Need to install React~~
 - ~~Need to make flask show react app~~
 - ~~Need to install react router and mui~~
-- Need to create layout page
-- Need to create home page
-- Need to create login page
+- ~~Need to create layout page~~
+- ~~Need to create home page~~
+- ~~Need to create login form~~
+- Need to create signup page
+- Need to create footer section
 - Need to create profile page
 - Need to create make api request and validate it
 - Need to connect SQLAlchemy to app

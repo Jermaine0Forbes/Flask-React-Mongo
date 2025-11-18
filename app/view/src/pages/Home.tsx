@@ -6,6 +6,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router';
 
 export default function Home() {
     return (
@@ -29,7 +30,7 @@ export default function Home() {
                         variant='subtitle1'>
 
                         Sign in to access your user</Typography>
-                    <Button variant="outlined"> Sign In</Button>
+                    <Button variant="outlined" component={Link} to="/signup"> Sign In</Button>
 
                 </div>
             </section>
@@ -45,7 +46,7 @@ export default function Home() {
                                 <AcUnitIcon />
                             </div>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             </p>
                         </Grid>
                         <Grid
@@ -54,7 +55,7 @@ export default function Home() {
                                 <WhatshotIcon />
                             </div>
                             <p>
-                               Sed velit sapien, lacinia vel nibh sit amet, elementum tristique arcu.
+                                Sed velit sapien, lacinia vel nibh sit amet, elementum tristique arcu.
                             </p>
                         </Grid>
                         <Grid
@@ -63,7 +64,7 @@ export default function Home() {
                                 <FlashOnIcon />
                             </div>
                             <p>
-                                 Vestibulum mollis sem sagittis, rutrum tellus sit amet, dapibus urna.
+                                Vestibulum mollis sem sagittis, rutrum tellus sit amet, dapibus urna.
                             </p>
                         </Grid>
 

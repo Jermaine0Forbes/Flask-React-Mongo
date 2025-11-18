@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Outlet,
     Link,
-
     // useNavigate
 } from "react-router";
 import Container from '@mui/material/Container';
@@ -15,18 +14,38 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ScienceIcon from '@mui/icons-material/Science';
-import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
+import { useForm, SubmitHandler } from "react-hook-form"
+import { FormGroup, TextField } from '@mui/material';
+
+type DialogStatus = true | false;
+type Inputs = {
+    username: string
+    password: string
+};
+
 
 export default function DefaultLayout() {
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<DialogStatus>(false);
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<Inputs>();
 
-    const handleClose = () => {
+    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+    const handleClose = (): void => {
         setOpen(false);
     }
 
-    const toggleOpen = () => {
+    const toggleOpen = (): void => {
         setOpen(!open);
     }
 
@@ -38,23 +57,55 @@ export default function DefaultLayout() {
             id="layout-container"
         >
 
-                <Dialog onClose={handleClose} open={open}>
-                    <DialogTitle>Set backup account</DialogTitle>
+            <Dialog onClose={handleClose} open={open}>
+                <DialogTitle>log into your account</DialogTitle>
+                <DialogContent>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                    >
+                        <FormGroup>
+                            <FormControl>
 
-                </Dialog>
+                                <TextField
+                                    variant='standard'
+                                    label="username"
+                                    id="username"
+                                    {...register('username', { required: true })}
+                                />
+                            </FormControl>
+
+                        </FormGroup>
+
+                        <FormGroup>
+                            <FormControl>
+
+                                <TextField
+                                    variant='standard'
+                                    label="password"
+                                    id="password"
+                                    {...register('password', { required: true })}
+                                />
+                            </FormControl>
+
+                        </FormGroup>
+                        <Button type="submit">Submit</Button>
+                    </Box>
+                </DialogContent>
+            </Dialog>
             <AppBar position="static" id="app-bar">
                 <Grid
                     container
                 >
                     <Grid size={3} className="app-bar-grid">
-                        <Box 
-                        id="logo-section"
+                        <Box
+                            id="logo-section"
                         >
                             <ScienceIcon />
-                            <Typography 
-                            component={Link}
-                            to="/"
-                            variant='h5'>
+                            <Typography
+                                component={Link}
+                                to="/"
+                                variant='h5'>
 
                                 flaskRM
                             </Typography>
@@ -70,14 +121,14 @@ export default function DefaultLayout() {
                             id="toolbar"
                         >
                             <Button
-                               onClick={toggleOpen}
-                               className="links"
+                                onClick={toggleOpen}
+                                className="links"
                             >
                                 Login
                             </Button>
 
                             <Button
-                            className="links"
+                                className="links"
                                 component={Link}
                                 to="/signup"
                             >

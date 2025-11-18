@@ -16,8 +16,12 @@
         .group {
             text-align: center;
 
-            button {
+            button,a {
                 background-color: white;
+
+                &:hover {
+                    background-color:$blue2;
+                }
             }
         }
 
