@@ -51,94 +51,92 @@ export default function DefaultLayout() {
 
 
     return (
-        <Container
-            component={"main"}
-            maxWidth="xl"
-            id="layout-container"
-        >
 
-            <Dialog onClose={handleClose} open={open}>
-                <DialogTitle>log into your account</DialogTitle>
-                <DialogContent>
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit(onSubmit)}
-                    >
-                        <FormGroup>
-                            <FormControl>
+ <>
+ 
+ <Dialog onClose={handleClose} open={open}>
+     <DialogTitle>log into your account</DialogTitle>
+     <DialogContent>
+         <Box
+             component="form"
+             onSubmit={handleSubmit(onSubmit)}
+         >
+             <FormGroup>
+                 <FormControl>
 
-                                <TextField
-                                    variant='standard'
-                                    label="username"
-                                    id="username"
-                                    {...register('username', { required: true })}
-                                />
-                            </FormControl>
+                     <TextField
+                         variant='standard'
+                         label="username"
+                         id="username"
+                         {...register('username', { required: true })}
+                     />
+                 </FormControl>
 
-                        </FormGroup>
+             </FormGroup>
 
-                        <FormGroup>
-                            <FormControl>
+             <FormGroup>
+                 <FormControl>
 
-                                <TextField
-                                    variant='standard'
-                                    label="password"
-                                    id="password"
-                                    {...register('password', { required: true })}
-                                />
-                            </FormControl>
+                     <TextField
+                         variant='standard'
+                         label="password"
+                         id="password"
+                         {...register('password', { required: true })}
+                     />
+                 </FormControl>
 
-                        </FormGroup>
-                        <Button type="submit">Submit</Button>
-                    </Box>
-                </DialogContent>
-            </Dialog>
-            <AppBar position="static" id="app-bar">
-                <Grid
-                    container
-                >
-                    <Grid size={3} className="app-bar-grid">
-                        <Box
-                            id="logo-section"
-                        >
-                            <ScienceIcon />
-                            <Typography
-                                component={Link}
-                                to="/"
-                                variant='h5'>
+             </FormGroup>
+             <Button type="submit">Submit</Button>
+         </Box>
+     </DialogContent>
+ </Dialog>
+ <AppBar position="static" id="app-bar">
+     <Grid
+         container
+         maxWidth={"xl"}
+     >
+         <Grid size={3} className="app-bar-grid">
+             <Box
+                 id="logo-section"
+             >
+                 <ScienceIcon />
+                 <Typography
+                     component={Link}
+                     to="/"
+                     variant='h5'>
 
-                                flaskRM
-                            </Typography>
+                     flaskRM
+                 </Typography>
 
-                        </Box>
-                    </Grid>
-                    <Grid
-                        className="app-bar-grid"
-                        size={3}
-                        offset={6}
-                    >
-                        <Toolbar
-                            id="toolbar"
-                        >
-                            <Button
-                                onClick={toggleOpen}
-                                className="links"
-                            >
-                                Login
-                            </Button>
+             </Box>
+         </Grid>
+         <Grid
+             className="app-bar-grid"
+             size={3}
+             offset={6}
+         >
+             <Toolbar
+                 id="toolbar"
+             >
+                 <Button
+                     onClick={toggleOpen}
+                     className="links"
+                 >
+                     Login
+                 </Button>
 
-                            <Button
-                                className="links"
-                                component={Link}
-                                to="/signup"
-                            >
-                                Signup
-                            </Button>
-                        </Toolbar>
-                    </Grid>
-                </Grid>
-            </AppBar>
-            <Outlet />
-        </Container>
+                 <Button
+                     className="links"
+                     component={Link}
+                     to="/signup"
+                 >
+                     Signup
+                 </Button>
+             </Toolbar>
+         </Grid>
+     </Grid>
+ </AppBar>
+ <Outlet />
+ </>
     );
 }
