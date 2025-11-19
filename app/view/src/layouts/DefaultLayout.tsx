@@ -22,6 +22,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormGroup, TextField } from '@mui/material';
+import DefaultFooter from '../partials/DefaultFooter';
 
 type DialogStatus = true | false;
 type Inputs = {
@@ -137,6 +138,7 @@ export default function DefaultLayout() {
      </Grid>
  </AppBar>
  <Outlet />
+ <DefaultFooter/>
  </>
     );
 }

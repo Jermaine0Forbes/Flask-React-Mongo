@@ -1,0 +1,12 @@
+@use '_var' as *;
+
+
+footer {
+
+    background-color: $blue;
+     color: white;
+     min-height: 50px;
+     display: flex;
+     align-items: center;
+     font-family: $font1;
+}
