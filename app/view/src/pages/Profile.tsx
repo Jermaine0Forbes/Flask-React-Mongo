@@ -20,7 +20,7 @@ export default function Profile() {
                 maxWidth="xl"
                 id="profile-grid"
             >
-                <Grid size={4}
+                <Grid size={{xs: 12, md:4}}
 
                     id="profile-img"
                 >
