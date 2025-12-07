@@ -9,8 +9,8 @@
 - ~~Need to create login form~~
 - ~~Need to create signup page~~
 - ~~Need to create footer section~~
-- Need to create profile page
-- Need to create make api request and validate it
+- ~~Need to create profile page~~
+- Need to create validation on login api request
 - Need to connect SQLAlchemy to app
 - Need to connect Mongo to app
 - Need to create schema for User
