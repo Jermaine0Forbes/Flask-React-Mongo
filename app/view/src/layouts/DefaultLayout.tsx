@@ -35,7 +35,7 @@ export default function DefaultLayout() {
 
  <>
  
-<LoginDialog  open setOpen={setOpen}/>
+<LoginDialog  open={open} setOpen={setOpen}/>
  <AppBar position="static" id="app-bar">
      <Grid
          container
