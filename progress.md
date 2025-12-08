@@ -10,12 +10,12 @@
 - ~~Need to create signup page~~
 - ~~Need to create footer section~~
 - ~~Need to create profile page~~
-- Need to create validation on login api request
-    - salt password
-    - change api to login
-    - fetch request to api
-    - on success redirect to profile
-- Need to connect SQLAlchemy to app
-- Need to connect Mongo to app
-- Need to create schema for User
-- Need to create a post request and verify it saves in mongo
+- ~~Need to create validation on login api request~~
+    - ~~salt password~~
+    - ~~change api to login~~
+    - ~~fetch request to api~~
+    - ~~on success redirect to profile~~
+- connecting SQLAlchemy to app
+- connecting Mongo to app
+- creating schema for User
+- creating users for Mongo
