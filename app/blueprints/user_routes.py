@@ -1,8 +1,8 @@
 # user_routes.py
-from typing import Any
 from flask import Blueprint, request, jsonify, current_app
 from marshmallow import  ValidationError
 from ..validation.login_validation import LoginSchema
+import uuid
 
 user_bp = Blueprint('user', __name__)
 
@@ -27,7 +27,7 @@ def signup():
                 bcrypt = current_app.config['BCRYPT']
                 pswd = user.get("password")
                 hashed = bcrypt.generate_password_hash(pswd).decode('utf-8')
-                user.update({'password': hashed})
+                user.update({'password': hashed,  "uuid": uuid.uuid4()})
             return jsonify(user)
         except ValidationError as err:
             return jsonify(err.messages)
