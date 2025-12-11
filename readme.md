@@ -10,6 +10,13 @@ pip install flask
 
 pip install python-dotenv
 
+pip install mysql-connector
+
+pip install mysqlclient
+
+pip install marsmallow
+
+
 ```
 
 ## Activate the environment

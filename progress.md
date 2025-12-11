@@ -15,7 +15,10 @@
     - ~~change api to login~~
     - ~~fetch request to api~~
     - ~~on success redirect to profile~~
-- connecting SQLAlchemy to app
+- ~~connecting SQLAlchemy to app~~
+    - ~~create models/sqlalchemy directory~~
+    - ~~create env variable for mysql connection~~
+    - ~~create schema for user~~
+- creating users for MySQL
 - connecting Mongo to app
-- creating schema for User
 - creating users for Mongo
