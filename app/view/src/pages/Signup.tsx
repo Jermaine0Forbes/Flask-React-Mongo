@@ -32,7 +32,9 @@ export default function Signup()
                 if(data?.ok) {
                     console.log("response is ...")
                     console.log(data)
-                    redirect("/profile");
+                    const json = await data.json()
+                    localStorage.setItem("_t", json.jwt);
+                    redirect("/profile/"+json.uuid);
                 }
             }
         })

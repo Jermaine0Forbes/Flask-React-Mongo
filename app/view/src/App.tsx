@@ -7,15 +7,19 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
      Component: DefaultLayout,
-    //  errorElement: <ErrorPage/>,
+     errorElement: <ErrorPage/>,
      children: [
        { index: true, Component: Home },
-       { path: 'profile', Component: Profile },
+       { path: 'profile', children: [
+        {index: true, Component: Profile},
+        {path: ":id", Component: Profile},
+       ],
+        },
        { path: 'login', Component: Login },
        { path: 'signup', Component: Signup }
      ]

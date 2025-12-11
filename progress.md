@@ -19,6 +19,12 @@
     - ~~create models/sqlalchemy directory~~
     - ~~create env variable for mysql connection~~
     - ~~create schema for user~~
-- creating users for MySQL
+- ~~creating users for MySQL~~
+    - ~~install jwt~~
+    - ~~check if username already exists~~
+    - ~~create user turn data into jwt token~~
+    - ~~save the user ~~
+    - ~~return token and possibly save to local storage~~
+    - ~~redirect to profile after registering~~
 - connecting Mongo to app
 - creating users for Mongo

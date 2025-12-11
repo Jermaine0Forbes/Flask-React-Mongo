@@ -28,6 +28,7 @@ def init_db():
                     print(f"database {Config.DB_NAME}, has been created!")
             engine = create_engine(DB_URL, echo=True)
             Base.metadata.create_all(engine)
+            app.config['ENGINE'] = engine
             print("database has been connected")
     except Exception as e:
            print(e)
