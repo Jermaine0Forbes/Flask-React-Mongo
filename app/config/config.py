@@ -11,3 +11,4 @@ class Config:
     DB_NAME = environ.get("DATABASE_NAME")
     ALLOWED_ORIGIN = environ.get("ALLOWED_ORIGIN")
     MONGO_CONNECTION = environ.get("MONGO_CONNNECTION")
+    MONGO_ON = environ.get("MONGO_ON")
