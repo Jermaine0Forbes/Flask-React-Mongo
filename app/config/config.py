@@ -10,5 +10,5 @@ class Config:
     ALCHEMY_DATABASE_URI = environ.get("DATABASE_URL")
     DB_NAME = environ.get("DATABASE_NAME")
     ALLOWED_ORIGIN = environ.get("ALLOWED_ORIGIN")
-    MONGO_CONNECTION = environ.get("MONGO_CONNNECTION")
+    MONGO_CONNECTION = environ.get("MONGO_CONNECTION")
     MONGO_ON = environ.get("MONGO_ON")

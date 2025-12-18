@@ -21,9 +21,10 @@ def init_db():
     DB_URL = f"{Config.ALCHEMY_DATABASE_URI}/{Config.DB_NAME}"
     IS_MONGO_ON = Config.MONGO_ON
     if IS_MONGO_ON:
-
+        print('mongo is on')
+        MONGO_DB = app.config['MONGO_DB']
         try:
-            if Config.MONGO_CONNECTION is not None:
+            if Config.MONGO_CONNECTION is not None and MONGO_DB  is not None:
                 client = pymongo.MongoClient(Config.MONGO_CONNECTION)
                 if  Config.DB_NAME is not None:
                     db = client[Config.DB_NAME]
@@ -32,12 +33,14 @@ def init_db():
                     if collection is not None:
                         print(f"and collection 'users', has been created!")
                     app.config['MONGO_DB'] = db
-
+            client = pymongo.MongoClient(Config.MONGO_CONNECTION)
+            print( client.list_database_names())
+            
         except Exception as e:
             print(e)
     else:
         try:
-            if Config.ALCHEMY_DATABASE_URI is not None:
+            if Config.ALCHEMY_DATABASE_URI is not None and app.config['ENGINE'] is not None:
                 if not database_exists(DB_URL):
                     engine = create_engine(Config.ALCHEMY_DATABASE_URI, echo=True)
                     with engine.connect() as connection:
