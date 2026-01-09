@@ -42,5 +42,5 @@ class User:
             self.updated_at: datetime  = updated_at
     
     @property
-    def coll(self):
+    def name(self):
         return self.__collection

@@ -1,5 +1,27 @@
 from user import User
+import pymongo
 
-def init_mongo(client):
+def init_mongo(connection_str: str, db_name: str):
+    client = pymongo.MongoClient(connection_str)
+    data = {
+        "username": 'example',
+        "password": 'password'
+    }
 
-    pass
+    if  db_name is not None:
+        db = client[db_name]
+        print(db)
+        if db_name in client.list_database_names():
+            print(f"database {db_name}, has been created!")
+            collection = db[User.name()]
+            if "users" in db.list_collection_names():
+                collection.insert_one(data)
+                print(f"and collection 'users', has been created!")
+                # app.config['MONGO_DB'] = db
+            else:
+                raise Exception("collection has not been created")
+        else: 
+            raise Exception("database has not been created")
+    else:
+        raise Exception('cannot find database name')
+    print(client.list_database_names())
