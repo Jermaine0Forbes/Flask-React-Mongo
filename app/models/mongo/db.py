@@ -13,7 +13,8 @@ def init_mongo(connection_str: str, db_name: str):
         print(db)
         if db_name in client.list_database_names():
             print(f"database {db_name}, has been created!")
-            collection = db[User.name()]
+            name = User.name 
+            collection = db[name if isinstance(name,str) else ""]
             if "users" in db.list_collection_names():
                 collection.insert_one(data)
                 print(f"and collection 'users', has been created!")

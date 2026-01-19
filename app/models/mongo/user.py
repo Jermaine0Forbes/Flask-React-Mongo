@@ -1,11 +1,12 @@
 from types import NoneType
 from datetime import datetime
+from typing import Any
 
 class User:
 
     __collection: str = "users"
 
-    def __init__(self, id, user,  username, password, phone, address, email, position, location, uuid, created_at, updated_at):
+    def __init__(self, user,  username, password, phone, address, email, position, location, uuid, created_at, updated_at):
         
         if isinstance(user, dict):
             for key, value in  user.items():
@@ -29,7 +30,6 @@ class User:
                     print(e)
                            
         else:
-            self.id: int = id
             self.username: str = username
             self.password: str = password
             self.phone: str = phone
@@ -42,5 +42,8 @@ class User:
             self.updated_at: datetime  = updated_at
     
     @property
-    def name(self):
+    def name(self) -> str :
         return self.__collection
+    
+    def __getitem__(self, name:str) -> Any:
+        return getattr(self, name)
