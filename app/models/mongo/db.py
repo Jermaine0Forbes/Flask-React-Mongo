@@ -1,11 +1,17 @@
 from user import User
 import pymongo
+from ...config.utils import is_str
+
+def import_models():
+    return [User]
+
+
 
 def init_mongo(connection_str: str, db_name: str):
     client = pymongo.MongoClient(connection_str)
+    models = import_models()
     data = {
-        "username": 'example',
-        "password": 'password'
+        "dummy": 'data',
     }
 
     if  db_name is not None:
@@ -13,14 +19,14 @@ def init_mongo(connection_str: str, db_name: str):
         print(db)
         if db_name in client.list_database_names():
             print(f"database {db_name}, has been created!")
-            name = User.name 
-            collection = db[name if isinstance(name,str) else ""]
-            if "users" in db.list_collection_names():
-                collection.insert_one(data)
-                print(f"and collection 'users', has been created!")
-                # app.config['MONGO_DB'] = db
-            else:
-                raise Exception("collection has not been created")
+            for model in models:    
+                name = model.name 
+                collection = db[is_str(name)]
+                if name in db.list_collection_names():
+                    collection.insert_one(data)
+                    print(f"and collection '{name}', has been created!")
+                else:
+                    raise Exception("collection has not been created")
         else: 
             raise Exception("database has not been created")
     else:
