@@ -9,7 +9,12 @@ class User(Model):
 
     def __init__(self):
         
-        self.connect(self.name)
+       connected = self.connect(self.name)
+
+       if connected is None:
+            raise Exception("Collection has not been connected")
+
+       
     
     @property
     def name(self) -> str :
