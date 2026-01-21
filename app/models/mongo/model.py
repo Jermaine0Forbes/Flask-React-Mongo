@@ -11,11 +11,18 @@ class Model:
     def __init__(self):
         pass
 
-    def create(self):
+    def save(self, data: dict) -> None:
+        if self.db is  None:
+            raise Exception("Database collection is not connected")
+        
+        result = self.db.insert_one(data)
+
+        if result.acknowledged is False:
+            raise Exception("Data has not been saved")
+        else:
+            print("Data has been saved")
         pass
 
-    def update(self):
-        pass
 
     def delete(self):
         pass
@@ -25,7 +32,7 @@ class Model:
         return self.__db
     
     @db.setter
-    def deb(self, val):
+    def db(self, val):
         self.__db = val
 
     def connect(self, coll: str):
@@ -37,7 +44,8 @@ class Model:
             db = client[db_name]
             if db_name in client.list_database_names():
                 collection = db[is_str(coll)]
-                self.db(collection)
+                if collection is not None:
+                    self.db = collection
             else: 
                 raise Exception("database has not been created")
         else:

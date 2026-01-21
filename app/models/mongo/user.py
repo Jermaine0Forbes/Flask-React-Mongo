@@ -13,7 +13,23 @@ class User(Model):
 
        if connected is None:
             raise Exception("Collection has not been connected")
+   
+    def create(self, data: dict) -> None:
+        if ['username', 'password'] not in data.keys():
+            raise Exception("username and password are required fields")
+        
+        data['created_at'] = datetime.now()
 
+        self.save(data)
+        pass
+
+    def update(self, data: dict):
+        if ['username', 'password'] not in data.keys():
+            raise Exception("username and password are required fields")
+        
+        data['updated_at'] = datetime.now()
+        self.save(data)
+        pass
        
     
     @property
