@@ -8,6 +8,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy_utils import database_exists
 from .models.sqlalchemy.user import Base
 import pymongo
+from .models.mongo.db import init_mongo
 
 
 app = Flask(__name__, template_folder="view/build", static_folder="view/build/static")
@@ -24,24 +25,11 @@ def init_db():
         print('mongo is on')
         MONGO_DB = app.config.get('MONGO_DB')
         try:
-            if Config.MONGO_CONNECTION is not None and MONGO_DB is  None:
-                client = pymongo.MongoClient(Config.MONGO_CONNECTION)
-                if  Config.DB_NAME is not None:
-                    db = client[Config.DB_NAME]
-                    print(db)
-                    if Config.DB_NAME in client.list_database_names():
-                        print(f"database {Config.DB_NAME}, has been created!")
-                        db["users"]
-                        if "users" in db.list_collection_names():
-                            print(f"and collection 'users', has been created!")
-                            app.config['MONGO_DB'] = db
-                        else:
-                            raise Exception("collection has been created")
-                    else: 
-                        raise Exception("database has not been created")
-            client = pymongo.MongoClient(Config.MONGO_CONNECTION)
-            print( client.list_database_names())
-            
+            if Config.MONGO_CONNECTION is not None and MONGO_DB is  None and Config.DB_NAME is not None :
+               db = init_mongo(Config.MONGO_CONNECTION, Config.DB_NAME)
+               app.config['MONGO_DB'] = db
+            else:
+                print("mongo db has been connected or config values are None")
         except Exception as e:
             print(e)
     else:

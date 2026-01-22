@@ -26,5 +26,5 @@
     - ~~save the user ~~
     - ~~return token and possibly save to local storage~~
     - ~~redirect to profile after registering~~
-- connecting Mongo to app
+- ~~connecting Mongo to app~~
 - creating users for Mongo

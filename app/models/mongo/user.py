@@ -1,7 +1,7 @@
 from types import NoneType
 from datetime import datetime
 from typing import Any
-from model import Model
+from .model import Model
 
 class User(Model):
 
@@ -35,6 +35,10 @@ class User(Model):
     @property
     def name(self) -> str :
         return self.__collection
+    
+    @classmethod
+    def getName(cls) -> str:
+        return cls.__collection
     
     def __getitem__(self, name:str) -> Any:
         return getattr(self, name)
