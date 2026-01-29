@@ -15,8 +15,7 @@ class User(Model):
             raise Exception("Collection has not been connected")
    
     def create(self, data: dict) -> None:
-        if ['username', 'password'] not in data.keys():
-            raise Exception("username and password are required fields")
+        self.has_required(data)
         
         data['created_at'] = datetime.now()
 

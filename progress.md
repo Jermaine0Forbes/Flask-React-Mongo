@@ -27,4 +27,5 @@
     - ~~return token and possibly save to local storage~~
     - ~~redirect to profile after registering~~
 - ~~connecting Mongo to app~~
+- make properties necessary in model class
 - creating users for Mongo

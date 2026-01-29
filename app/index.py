@@ -7,7 +7,6 @@ from flask_cors import CORS
 from sqlalchemy import create_engine, text
 from sqlalchemy_utils import database_exists
 from .models.sqlalchemy.user import Base
-import pymongo
 from .models.mongo.db import init_mongo
 
 

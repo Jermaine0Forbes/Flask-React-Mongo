@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router';
 import FormControl from '@mui/material/FormControl';
 // import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import { Button, FormGroup, TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { Button, FormGroup, TextField } from '@mui/material';
 import { userSignup } from '../services/user';
 import { SignupInputs } from "../types";
 
@@ -139,11 +139,7 @@ export default function Signup()
 
 
             </Container>
-
-            
         </section>
-
-
         </main>
     )
 }

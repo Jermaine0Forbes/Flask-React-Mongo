@@ -1,15 +1,25 @@
 import pymongo
 from pymongo.collection import Collection
 from types import NoneType
+from typing import List
 from ...config.config import Config
 from ...config.utils import is_str
 
 class Model:
 
     __db: Collection | NoneType = None
+    __required: List[str] = []
 
     def __init__(self):
         pass
+
+    def has_required(self, data:dict):
+         if not self.required:
+             return True
+         
+         if self.required not in data.keys():
+             arr = ",".join(self.required)
+             raise Exception(arr+" are required fields")
 
     def save(self, data: dict) -> None:
         if self.db is  None:
@@ -34,6 +44,14 @@ class Model:
     @db.setter
     def db(self, val):
         self.__db = val
+
+    @property
+    def required(self):
+        return self.__required
+
+    @required.setter
+    def required(self, val:List[str]):
+        self.__required = val
 
     def connect(self, coll: str):
         client = pymongo.MongoClient(Config.MONGO_CONNECTION)
