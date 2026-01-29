@@ -9,6 +9,7 @@ class Model:
 
     __db: Collection | NoneType = None
     __required: List[str] = []
+    __collection: str = ""
 
     def __init__(self):
         pass
@@ -52,6 +53,20 @@ class Model:
     @required.setter
     def required(self, val:List[str]):
         self.__required = val
+
+
+    @property
+    def collection(self) -> str:
+        return self.__collection
+    
+    @collection.setter
+    def collection(self, val: str):
+        self.__collection = val
+
+    @classmethod
+    def getName(cls) -> str:
+        return cls.__collection
+
 
     def connect(self, coll: str):
         client = pymongo.MongoClient(Config.MONGO_CONNECTION)

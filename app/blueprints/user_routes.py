@@ -9,6 +9,7 @@ import datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from ..models.sqlalchemy.user import User
+from ..models.mongo.user import User as UserM
 
 user_bp = Blueprint('user', __name__)
 
@@ -83,6 +84,20 @@ def login():
             return jsonify(err.messages)
     else:
         return "Invalid json request data", 400
+    
+@user_bp.post("/create/mongo")
+def create_mongo():
+    json = request.json 
+    if json is not None:
+        try:
+          user = UserM()
+
+          return jsonify({ "message":"foo", "status":400})
+          
+        except ValidationError as err:
+            return jsonify(err.messages)
+    else: 
+        return jsonify({ "message":"Invalid json request data", "status":400})
     
 
 if __name__ == "__main__":
