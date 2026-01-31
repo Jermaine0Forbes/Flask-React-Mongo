@@ -91,8 +91,12 @@ def create_mongo():
     if json is not None:
         try:
           user = UserM()
-
-          return jsonify({ "message":"foo", "status":400})
+          result = user.create(json)
+        
+          if result is dict:
+            return jsonify({ "message":"success", "status":200, "data": result })
+          else:
+            return jsonify({ "message":"no data been retrieved", "status":500})
           
         except ValidationError as err:
             return jsonify(err.messages)

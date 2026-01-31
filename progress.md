@@ -28,4 +28,11 @@
     - ~~redirect to profile after registering~~
 - ~~connecting Mongo to app~~
 - ~~make properties necessary in model class~~
-- creating users for Mongo
+- ~~creating users for Mongo~~
+- add conditional in register api to create user
+- possibly make email an optional valdiation field
+- create a mongo user through register
+- create jwt token after creating mongo user
+- add logic to login api
+- return jwt after successful login
+

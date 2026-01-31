@@ -15,14 +15,16 @@ class Model:
         pass
 
     def has_required(self, data:dict):
+         
          if not self.required:
              return True
-         
-         if self.required not in data.keys():
-             arr = ",".join(self.required)
+   
+         if list(set(self.required) - set(data.keys())):
+             arr = ", ".join(self.required)
              raise Exception(arr+" are required fields")
+         
 
-    def save(self, data: dict) -> None:
+    def save(self, data: dict):
         if self.db is  None:
             raise Exception("Database collection is not connected")
         
@@ -32,7 +34,20 @@ class Model:
             raise Exception("Data has not been saved")
         else:
             print("Data has been saved")
-        pass
+            return self.prepare_bson_data()
+        
+    def prepare_bson_data(self):
+
+        if self.db is None:
+            raise Exception("Database is not connected")
+
+        bson =  self.db.find_one(sort=[('created_at', pymongo.DESCENDING)])
+
+        if bson is None:
+            raise Exception("There was no data found when fetching")
+        
+        bson['_id'] = str(bson['_id'])
+        return bson
 
 
     def delete(self):

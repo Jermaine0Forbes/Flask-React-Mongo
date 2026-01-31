@@ -18,13 +18,12 @@ class User(Model):
        if connected is None:
             raise Exception("Collection has not been connected")
    
-    def create(self, data: dict) -> None:
+    def create(self, data: dict):
         self.has_required(data)
         
         data['created_at'] = datetime.now()
 
-        self.save(data)
-        pass
+        return self.save(data)
 
     def update(self, data: dict):
         self.has_required(data)
@@ -38,9 +37,9 @@ class User(Model):
     def name(self) -> str :
         return self.__collection
     
-    # @classmethod
-    # def getName(cls) -> str:
-    #     return cls.__collection
+
     
-    # def __getitem__(self, name:str) -> Any:
-    #     return getattr(self, name)
+    @classmethod
+    def getName(cls) -> str:
+        return cls.__collection
+    

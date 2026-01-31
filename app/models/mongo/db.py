@@ -19,7 +19,7 @@ def init_mongo(connection_str: str, db_name: str):
     if  db_name is not None:
         db = client[db_name]
         print(db)
-        for model in models:    
+        for model in models:
             name = model.getName() 
             print(f" collection name is {name}")
             collection = db[is_str(name)]
