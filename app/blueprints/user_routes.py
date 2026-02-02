@@ -16,6 +16,7 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/profile')
 def profile():
+    print(current_app.config)
     return "User Profile"
 
 @user_bp.route('/settings')
@@ -26,6 +27,8 @@ def settings():
 def signup():
     json = request.json 
     schema = LoginSchema()
+    isMongo = current_app.config['MONGO_ON']
+    userMongo = UserM()
     if json is not None:
         try:
             if "password2" in json:
@@ -33,22 +36,27 @@ def signup():
             user = schema.load(data = json)
             if isinstance(user, dict):
                 bcrypt = current_app.config['BCRYPT']
-                engine = current_app.config['ENGINE']
-                username, password = user.values()
-                stmt = select(User).where(User.username == username)
-                with Session(engine) as session:
-                        
-                    result =  session.execute(stmt)
+                username, password, email = user.values()
+                hashed = bcrypt.generate_password_hash(password).decode('utf-8')
+                unique = uuid.uuid4().__str__()
 
-                    if result.first() is None:
-                        hashed = bcrypt.generate_password_hash(password).decode('utf-8')
-                        unique = uuid.uuid4().__str__()
-                        register = User(username=username, password=hashed, uuid=unique)
-                        session.add(register)
-                        session.commit()
-                    
-                    else:
-                        abort(400, "Username already exists" )
+                if isMongo :
+                    userMongo.create(json | { password: hashed, 'uuid': unique})
+                else:
+                    engine = current_app.config['ENGINE']
+                    stmt = select(User).where(User.username == username)
+                    with Session(engine) as session:
+                            
+                        result =  session.execute(stmt)
+
+                        if result.first() is None:
+
+                            register = User(username=username, password=hashed, uuid=unique)
+                            session.add(register)
+                            session.commit()
+                        
+                        else:
+                            abort(400, "Username already exists" )
                     
                 payload = {
                     "uuid": unique,
