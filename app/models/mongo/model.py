@@ -60,14 +60,15 @@ class Model:
         #     raise Exception("Database is not connected")
         # return True
     
-    def get_by(self, column: str, val: str):
+    def get_by(self, column: str, val: str, opts: dict = {}, throw:bool = False):
         if self.db is None:
             raise Exception("Database is not connected")
-            
-        bson = self.db.find_one({column: val}, {"_id": 0})
-
-        if bson is None:
+        options = opts | {"_id": 0}
+        bson = self.db.find_one({column: val}, options)
+        
+        if bson is None and throw is True:
             raise Exception("There was no data found when fetching")
+
         return bson
         
 

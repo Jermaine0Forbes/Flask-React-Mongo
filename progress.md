@@ -34,8 +34,10 @@
 - ~~create a mongo user through the signup page~~
 - ~~create jwt token after creating mongo user~~
 - ~~check if username exists in mongo~~
-- create endpoint to see if jwt is still valid
-- get user information after jwt validation
+- ~~create endpoint to see if jwt is still valid~~
+- ~~get user information after jwt validation~~
+- create service to retrieve user profile
+- update ui to handle profile data
 - add logic to login api
 - return jwt after successful login
 

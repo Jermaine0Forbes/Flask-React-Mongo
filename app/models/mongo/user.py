@@ -29,6 +29,10 @@ class User(Model):
 
        exists = self.get_by("username", username)
        return True if exists else False
+    
+    def get_user(self, uuid: str):
+        exclude = { 'password': 0}
+        return self.get_by('uuid', uuid, exclude, True)
 
         
     def update(self, data: dict):

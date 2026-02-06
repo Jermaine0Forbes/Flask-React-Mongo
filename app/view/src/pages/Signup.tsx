@@ -106,7 +106,7 @@ export default function Signup()
                             variant='standard'
                             id="username"
                             className="form-field"
-                            value={name}
+                            // value={name}
                             {...register('username', { required: true })}
                         />
                     </FormControl>

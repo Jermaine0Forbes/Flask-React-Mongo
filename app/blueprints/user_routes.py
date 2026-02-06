@@ -10,14 +10,43 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from ..models.sqlalchemy.user import User
 from ..models.mongo.user import User as UserM
+from ..config.utils import jwt_expired as expired
 
 user_bp = Blueprint('user', __name__)
 
 
 @user_bp.route('/profile')
 def profile():
-    print(current_app.config)
-    return "User Profile"
+    auth  = request.headers.get("Authorization")
+    isMongo = current_app.config['MONGO_ON']
+    if not auth:
+        return jsonify({"message": "Authorization header is missing"}), 401
+    if auth is not None:
+         try:
+            parts = auth.split()
+            if parts is not None and parts[0].lower() == 'bearer':
+                token = parts[1]
+                SECRET_KEY = current_app.config['SECRET_KEY']
+                result = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=["HS256"])
+
+                if expired(result):
+                    return jsonify({'message': 'jwt has expired'}), 400
+                
+                if isMongo:
+                    userMongo = UserM()
+                    user = userMongo.get_user(result['uuid'])
+                    return jsonify({'message': 'decode success', 'data': user}), 200
+                else:
+                     return jsonify({'message': 'did not set up sql yet to fetch user'}), 500
+
+            else:
+
+                return jsonify({'message': 'decode failed'}), 500
+         except Exception as err:
+
+          return jsonify({'message': err}), 500
+    else:
+      return jsonify({ "message":"Invalid json request data"}), 400
 
 @user_bp.route('/settings')
 def settings():
@@ -68,7 +97,8 @@ def signup():
                     "iat": datetime.datetime.now(),
                     "iss": request.base_url,
                 }
-                SECRET_KEY = secrets.token_hex()
+                SECRET_KEY = current_app.config['SECRET_KEY']
+                # SECRET_KEY = secrets.token_hex()
                 encoded = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
                 return jsonify({"jwt": encoded, "uuid": unique})
         except ValidationError as err:
@@ -107,7 +137,7 @@ def create_mongo():
           if result is dict:
             return jsonify({ "message":"success", "status":200, "data": result })
           else:
-            return jsonify({ "message":"no data been retrieved", "status":500})
+            return jsonify({ "message":"no data has been retrieved", "status":500})
           
         except ValidationError as err:
             return jsonify(err.messages)
