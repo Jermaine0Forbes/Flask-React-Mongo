@@ -22,9 +22,15 @@ class User(Model):
         self.has_required(data)
         
         data['created_at'] = datetime.now()
-        
+
         return self.save(data)
 
+    def user_exists(self, username: str) -> bool: 
+
+       exists = self.get_by("username", username)
+       return True if exists else False
+
+        
     def update(self, data: dict):
         self.has_required(data)
         

@@ -25,10 +25,10 @@ def init_mongo(connection_str: str, db_name: str):
             collection = db[is_str(name)]
             if name not in db.list_collection_names():
                 collection.insert_one(data)
+                print(f"collection '{name}', has been created!")
 
         if db_name in client.list_database_names():
-            print(f"database {db_name}, has been created!")
-            print(f"and collection '{name}', has been created!")
+            print(f"database {db_name}, exists and is connected!")
         else: 
             raise Exception("database has not been created")
     else:

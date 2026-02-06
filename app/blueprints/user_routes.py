@@ -42,6 +42,8 @@ def signup():
                 unique = uuid.uuid4().__str__()
 
                 if isMongo :
+                    if userMongo.user_exists(username):
+                         abort(400, "Username already exists" )
                     userMongo.create(json | { password: hashed, 'uuid': unique})
                 else:
                     engine = current_app.config['ENGINE']
@@ -61,10 +63,10 @@ def signup():
                     
                 payload = {
                     "uuid": unique,
-                        "username": username,
-                        "exp": datetime.datetime.now() + datetime.timedelta(days=30),
-                        "iat": datetime.datetime.now(),
-                        "iss": request.base_url,
+                    "username": username,
+                    "exp": datetime.datetime.now() + datetime.timedelta(days=30),
+                    "iat": datetime.datetime.now(),
+                    "iss": request.base_url,
                 }
                 SECRET_KEY = secrets.token_hex()
                 encoded = jwt.encode(payload, SECRET_KEY, algorithm="HS256")

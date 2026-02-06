@@ -53,6 +53,23 @@ class Model:
         bson['_id'] = str(bson['_id'])
         print("returning data back to user")
         return bson
+    
+    def check_db(self, obj, method_name) -> bool:
+        return hasattr(obj, method_name) and callable(getattr(obj, method_name))
+        # if self.db is None:
+        #     raise Exception("Database is not connected")
+        # return True
+    
+    def get_by(self, column: str, val: str):
+        if self.db is None:
+            raise Exception("Database is not connected")
+            
+        bson = self.db.find_one({column: val}, {"_id": 0})
+
+        if bson is None:
+            raise Exception("There was no data found when fetching")
+        return bson
+        
 
 
     def delete(self):
