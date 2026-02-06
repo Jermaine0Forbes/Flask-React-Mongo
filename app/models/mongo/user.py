@@ -22,7 +22,7 @@ class User(Model):
         self.has_required(data)
         
         data['created_at'] = datetime.now()
-
+        
         return self.save(data)
 
     def update(self, data: dict):

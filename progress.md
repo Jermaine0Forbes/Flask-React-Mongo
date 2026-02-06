@@ -31,9 +31,9 @@
 - ~~creating users for Mongo~~
 - ~~add conditional in register api to create user~~
 - ~~possibly make email an optional valdiation field~~
-- create a mongo user through the signup page
-- check if username exists in mongo
+- ~~create a mongo user through the signup page~~
 - create jwt token after creating mongo user
+- check if username exists in mongo
 - add logic to login api
 - return jwt after successful login
 

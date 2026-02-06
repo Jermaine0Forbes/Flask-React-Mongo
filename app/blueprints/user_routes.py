@@ -36,7 +36,8 @@ def signup():
             user = schema.load(data = json)
             if isinstance(user, dict):
                 bcrypt = current_app.config['BCRYPT']
-                username, password, email = user.values()
+                username = user['username']
+                password = user['password']
                 hashed = bcrypt.generate_password_hash(password).decode('utf-8')
                 unique = uuid.uuid4().__str__()
 

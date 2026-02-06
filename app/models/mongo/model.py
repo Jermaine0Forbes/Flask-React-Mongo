@@ -17,17 +17,21 @@ class Model:
     def has_required(self, data:dict):
          
          if not self.required:
+             print(self.getName()+" has no required fields")
              return True
    
          if list(set(self.required) - set(data.keys())):
              arr = ", ".join(self.required)
              raise Exception(arr+" are required fields")
          
+         print(self.getName()+" required fields are present")
+         
 
     def save(self, data: dict):
         if self.db is  None:
             raise Exception("Database collection is not connected")
         
+        print('preparing to save data')
         result = self.db.insert_one(data)
 
         if result.acknowledged is False:
@@ -47,6 +51,7 @@ class Model:
             raise Exception("There was no data found when fetching")
         
         bson['_id'] = str(bson['_id'])
+        print("returning data back to user")
         return bson
 
 

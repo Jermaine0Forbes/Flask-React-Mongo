@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {EventHandler, useState} from 'react';
 import { useForm, SubmitHandler, FormProvider} from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
 import { useMutation } from "@tanstack/react-query";
@@ -12,10 +12,17 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { userSignup } from '../services/user';
 import { SignupInputs } from "../types";
+import { updateInputState } from '../utils';
 
 export default function Signup()
 {
         const redirect = useNavigate();
+        const [name, setName] = useState<string>('user1');
+        const [pass, setPass] = useState<string>('password');
+
+        const handleName = (e: Event) :void  => ( updateInputState(e, setName));
+
+        const handlePass = (e: Event): void => (updateInputState(e, setPass));
 
         const {
             register,
@@ -23,7 +30,11 @@ export default function Signup()
             getValues,
             // watch,
             formState: { errors },
-        } = useForm<SignupInputs>();
+        } = useForm<SignupInputs>({ defaultValues : {
+                username: 'user1',
+                password: 'password',
+                password2: 'password'
+            },});
     
         const form = useMutation({
             mutationFn: userSignup,
@@ -95,6 +106,7 @@ export default function Signup()
                             variant='standard'
                             id="username"
                             className="form-field"
+                            value={name}
                             {...register('username', { required: true })}
                         />
                     </FormControl>
