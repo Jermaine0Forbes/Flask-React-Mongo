@@ -12,7 +12,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { FormGroup, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import {LoginInputs, DialogStatus} from "../../types/index";
+import {LoginInputs, DialogStatus} from "../../definitions/types";
 import { userLogin } from '../../services/user';
 
 

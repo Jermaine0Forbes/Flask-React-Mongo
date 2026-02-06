@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import ScienceIcon from '@mui/icons-material/Science';
 import LoginDialog from '../components/dialogs/LoginDialog';
 import DefaultFooter from '../partials/DefaultFooter';
-import { DialogStatus} from "../types/index";
+import { DialogStatus} from "../definitions/types";
 
 
 

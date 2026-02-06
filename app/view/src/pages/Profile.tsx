@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -7,8 +7,33 @@ import MailIcon from '@mui/icons-material/Mail';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ReportIcon from '@mui/icons-material/Report';
 import { Grid, Typography, Stack, Toolbar, Button } from '@mui/material';
+import { getUserProfile } from '../services/user';
+import { useQuery } from '@tanstack/react-query';
+import { UserProfile } from '../definitions/interfaces';
 
 export default function Profile() {
+
+    const [profile, setProfile] = useState<UserProfile|null>(null)
+
+    const { data, isLoading, error} = useQuery({
+        queryKey:['get-profile'],
+        queryFn: getUserProfile,
+        // staleTime: Infinity,
+        // refetchOnMount: false,
+
+    });
+
+    useEffect(() => {
+        if(data !== undefined && "uuid" in data) {
+            console.log('data')
+            console.log(data)
+            setProfile({...profile, ...data})
+        }
+        if(error) {
+            console.error(error)
+        }
+    }, [data,error])
+
     return (
         <Box
             component="main"

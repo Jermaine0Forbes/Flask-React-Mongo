@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { userSignup } from '../services/user';
-import { SignupInputs } from "../types";
+import { SignupInputs } from "../definitions/types";
 import { updateInputState } from '../utils';
 
 export default function Signup()

@@ -35,7 +35,7 @@ def profile():
                 if isMongo:
                     userMongo = UserM()
                     user = userMongo.get_user(result['uuid'])
-                    return jsonify({'message': 'decode success', 'data': user}), 200
+                    return jsonify(user), 200
                 else:
                      return jsonify({'message': 'did not set up sql yet to fetch user'}), 500
 
