@@ -3,7 +3,6 @@ from flask import Blueprint, request, jsonify, current_app, abort, make_response
 from marshmallow import  ValidationError
 from ..validation.login_validation import LoginSchema
 import uuid
-import secrets
 import jwt
 import datetime
 from sqlalchemy import select

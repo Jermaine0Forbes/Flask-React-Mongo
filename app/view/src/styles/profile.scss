@@ -2,7 +2,7 @@
 
 
 #profile {
-     margin: 2em 0;
+    margin: 2em 0;
 
     &-img {
 
@@ -11,8 +11,8 @@
 
             width: 100%;
             max-width: 400px;
-            height:400px;
-            display:flex;
+            height: 400px;
+            display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 10px;
@@ -27,37 +27,56 @@
     &-info {
 
         .group {
-            text-transform:capitalize;
+            text-transform: capitalize;
+            font-family: $font1;
             &-1 {
                 display: flex;
-                align-items:center;
-                font-family:$font1;
+                align-items: baseline;
                 margin-bottom: 1em;
 
                 h1 {
                     font-size: 2.5em;
-                    
+
                 }
 
-                .location {
-                    display:flex;
-                    align-items: center;
-                    margin-left: 1em;
-                }
+
             }
 
             &-2 {
                 #{join($headers, ",")} {
 
                     font-size: 1.5em;
-                    
+
                 }
+
                 margin-bottom: 1em;
+                .group {
+                    margin-bottom: 0.5em;
+                }
             }
 
             &-3 {
                 padding-left: 0;
             }
+
+            .location, .position {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+
+                svg {
+                    margin-right:10px;
+                }
+
+            }
+
+            .missing {
+                color: $grey;
+                font-style: italic;
+                text-transform:lowercase;
+            }
+
+            
         }
     }
 }
