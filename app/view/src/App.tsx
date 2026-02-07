@@ -8,21 +8,23 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ErrorPage from './pages/ErrorPage';
+import AuthProvider from './providers/AuthProvider';
 
 const router = createBrowserRouter([
   {
-     Component: DefaultLayout,
-     errorElement: <ErrorPage/>,
-     children: [
-       { index: true, Component: Home },
-       { path: 'profile', children: [
-        {index: true, Component: Profile},
-        {path: ":id", Component: Profile},
-       ],
-        },
-       { path: 'login', Component: Login },
-       { path: 'signup', Component: Signup }
-     ]
+    Component: DefaultLayout,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, Component: Home },
+      {
+        path: 'profile', children: [
+          { index: true, Component: Profile },
+          { path: ":id", Component: Profile },
+        ],
+      },
+      { path: 'login', Component: Login },
+      { path: 'signup', Component: Signup }
+    ]
   },
 ]);
 
@@ -31,9 +33,11 @@ const queryClient = new QueryClient();
 function App() {
 
   return (
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
 
   )
 }

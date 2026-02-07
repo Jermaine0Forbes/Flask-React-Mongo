@@ -37,7 +37,7 @@
 - ~~create endpoint to see if jwt is still valid~~
 - ~~get user information after jwt validation~~
 - ~~create service to retrieve user profile~~
-- update ui to handle profile data
+- ~~update ui to handle profile data~~
 - create auth provider and reducer/context
 - create profile link
 - add logic to login api
