@@ -13,7 +13,7 @@ export const authReducer = (state:AuthState, action:Action ) =>
                 return {...state, loggedIn: true, uuid: id }
             case "LOGGING_OUT":
                 console.log('logging out')
-                return {...state, loggedIn:false, currentUser:  null}
+                return {...state, loggedIn:false, currentUser:  null, uuid: ""}
             case "GET_USER_OK":
                 console.log('got user information')
                 const obj = typeof action?.value  === "object" ? action?.value : null;
