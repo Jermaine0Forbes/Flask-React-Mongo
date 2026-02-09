@@ -1,4 +1,4 @@
-import React, {EventHandler, useState} from 'react';
+import React, {EventHandler, useState, useContext} from 'react';
 import { useForm, SubmitHandler, FormProvider} from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
 import { useMutation } from "@tanstack/react-query";
@@ -13,16 +13,18 @@ import Container from '@mui/material/Container';
 import { userSignup } from '../services/user';
 import { SignupInputs } from "../definitions/types";
 import { updateInputState } from '../utils';
+import { AuthContext } from '../contexts';
 
 export default function Signup()
 {
         const redirect = useNavigate();
-        const [name, setName] = useState<string>('user1');
-        const [pass, setPass] = useState<string>('password');
+        const {dispatch} = useContext(AuthContext);
+        // const [name, setName] = useState<string>('user1');
+        // const [pass, setPass] = useState<string>('password');
 
-        const handleName = (e: Event) :void  => ( updateInputState(e, setName));
+        // const handleName = (e: Event) :void  => ( updateInputState(e, setName));
 
-        const handlePass = (e: Event): void => (updateInputState(e, setPass));
+        // const handlePass = (e: Event): void => (updateInputState(e, setPass));
 
         const {
             register,
@@ -45,6 +47,14 @@ export default function Signup()
                     console.log(data)
                     const json = await data.json()
                     localStorage.setItem("_t", json.jwt);
+                    if( typeof dispatch == 'function') {
+
+                        dispatch({
+                            type: "LOGGING_IN",
+                            action: json.uuid,
+                        })
+
+                    }
                     redirect("/profile/"+json.uuid);
                 }
             }

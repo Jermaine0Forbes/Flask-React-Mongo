@@ -38,8 +38,12 @@
 - ~~get user information after jwt validation~~
 - ~~create service to retrieve user profile~~
 - ~~update ui to handle profile data~~
-- create auth provider and reducer/context
-- create profile link
+- ~~create auth provider and reducer/context~~
+- ~~create profile link~~
+- need to add logout functionality
 - add logic to login api
 - return jwt after successful login
+- need to add proper type hinting to context and reducer
+- need to refactor
+- need to add test cases
 

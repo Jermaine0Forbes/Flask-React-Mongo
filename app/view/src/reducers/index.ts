@@ -1,6 +1,7 @@
 
-
-export const authReducer = (state:object, action:object ) => 
+import { Action } from "../definitions/types";
+import { AuthState } from "../definitions/interfaces";
+export const authReducer = (state:AuthState, action:Action ) => 
 {
     if("type" in action && "value" in action ){
 
@@ -8,7 +9,8 @@ export const authReducer = (state:object, action:object ) =>
     
             case "LOGGING_IN":
                 console.log('logging in')
-                return {...state, loggedIn: true, currentUser: action?.value }
+                const id = typeof action?.value === "string" ? action.value: "";
+                return {...state, loggedIn: true, uuid: id }
             case "LOGGING_OUT":
                 console.log('logging out')
                 return {...state, loggedIn:false, currentUser:  null}

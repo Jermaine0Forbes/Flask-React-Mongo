@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -11,10 +11,12 @@ import { getUserProfile } from '../services/user';
 import { useQuery } from '@tanstack/react-query';
 import { UserProfile } from '../definitions/interfaces';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import { AuthContext } from '../contexts';
 
 export default function Profile() {
 
     const [profile, setProfile] = useState<UserProfile | null>(null)
+    const { dispatch } = useContext(AuthContext);
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['get-profile'],
@@ -29,6 +31,13 @@ export default function Profile() {
             console.log('data')
             console.log(data)
             setProfile({ ...profile, ...data })
+            if( typeof dispatch === "function") {
+
+                dispatch({
+                    type: "GET_USER_OK",
+                     value: data,
+                })
+            }
         }
         if (error) {
             console.error(error)
@@ -57,7 +66,7 @@ export default function Profile() {
 
                             :
 
-                            <Skeleton style={{ maxHeight: '400px', maxWidth: '400px', width: '100%' }} />
+                            <Skeleton style={{ height:"100vh",maxHeight: '400px', maxWidth: '400px', width: '100%' }} />
                     }
                 </Grid>
                 <Grid id="profile-info" size="auto">

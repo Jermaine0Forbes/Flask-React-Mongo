@@ -1,6 +1,7 @@
-import React, { 
-    useState, 
-    // useEffect 
+import React, {
+    useState,
+    useEffect, 
+    useContext,
 } from 'react';
 import {
     Outlet,
@@ -17,14 +18,41 @@ import Button from '@mui/material/Button';
 import ScienceIcon from '@mui/icons-material/Science';
 import LoginDialog from '../components/dialogs/LoginDialog';
 import DefaultFooter from '../partials/DefaultFooter';
-import { DialogStatus} from "../definitions/types";
-
+import { DialogStatus } from "../definitions/types";
+import { AuthContext } from '../contexts';
+import { CurrentUser } from '../definitions/interfaces';
+import { hasProps, isObject, isX} from '../utils';
+import {  isInterface } from '../definitions/types';
 
 
 
 export default function DefaultLayout() {
 
     const [open, setOpen] = useState<DialogStatus>(false);
+    const [ user, setUser] = useState<CurrentUser | null>(null);
+    const { state } = useContext(AuthContext);
+
+
+    useEffect(() => {
+
+        // need to refactor to add proper typescript checking
+        if( typeof state === "object" && state !== null) {
+
+            if( "uuid" in state && "currentUser" in state ) {
+
+                const { uuid , currentUser} = state;
+                let isObj = isObject(currentUser);
+                if(  isObj && isX(['username'], currentUser) && !user) {
+                    console.log('current user')
+                    console.log(currentUser)
+                    setUser(currentUser);
+                }
+
+            }
+
+
+        }
+    }, [state])
 
     const toggleOpen = (): void => {
         setOpen(!open);
@@ -33,58 +61,76 @@ export default function DefaultLayout() {
 
     return (
 
- <>
- 
-<LoginDialog  open={open} setOpen={setOpen}/>
- <AppBar position="static" id="app-bar">
-     <Grid
-         container
-         maxWidth={"xl"}
-     >
-         <Grid size={3} className="app-bar-grid">
-             <Box
-                 id="logo-section"
-             >
-                 <ScienceIcon />
-                 <Typography
-                     component={Link}
-                     to="/"
-                     variant='h5'>
+        <>
 
-                     flaskRM
-                 </Typography>
+            <LoginDialog open={open} setOpen={setOpen} />
+            <AppBar position="static" id="app-bar">
+                <Grid
+                    container
+                    maxWidth={"xl"}
+                >
+                    <Grid size={3} className="app-bar-grid">
+                        <Box
+                            id="logo-section"
+                        >
+                            <ScienceIcon />
+                            <Typography
+                                component={Link}
+                                to="/"
+                                variant='h5'>
 
-             </Box>
-         </Grid>
-         <Grid
-             className="app-bar-grid"
-             size={3}
-             offset={6}
-         >
-             <Toolbar
-                 id="toolbar"
-             >
-                 <Button
-                     onClick={toggleOpen}
-                     className="links"
-                 >
-                     Login
-                 </Button>
+                                flaskRM
+                            </Typography>
 
-                 <Button
-                     className="links"
-                     component={Link}
-                     to="/signup"
-                 >
-                     Signup
-                 </Button>
-                 
-             </Toolbar>
-         </Grid>
-     </Grid>
- </AppBar>
- <Outlet />
- <DefaultFooter/>
- </>
+                        </Box>
+                    </Grid>
+                    <Grid
+                        className="app-bar-grid"
+                        size={3}
+                        offset={6}
+                    >
+                        <Toolbar
+                            id="toolbar"
+                        >
+                            <Button
+                                onClick={toggleOpen}
+                                className="links"
+                            >
+                                Login
+                            </Button>
+
+                            <Button
+                                className="links"
+                                component={Link}
+                                to="/signup"
+                            >
+                                Signup
+                            </Button>
+
+                        {
+
+                            user && hasProps(user, ["uuid", "username"]) && (
+
+                            <Button
+                                className="links"
+                                component={Link}
+                                to={"/profile/"+user?.uuid}
+                            >
+                                {user?.username}
+                            </Button>
+
+                            ) 
+
+
+
+                        }
+
+                        </Toolbar>
+                    </Grid>
+                </Grid>
+            </AppBar>
+            <Outlet />
+            <DefaultFooter />
+        </>
     );
 }
