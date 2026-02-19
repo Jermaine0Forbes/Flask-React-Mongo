@@ -34,10 +34,14 @@ export default function DefaultLayout() {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const { state, dispatch } = useContext(AuthContext);
     const redirect = useNavigate();
-
+    const menuOpen = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
 
     const handleLogout = () => {
         localStorage.removeItem('_t')
@@ -130,8 +134,7 @@ export default function DefaultLayout() {
                                     <>
                                         <Button
                                             className="links"
-                                            component={Link}
-                                            to={"/profile/" + user?.uuid}
+                                            onClick={handleClick}
                                         >
                                             {user?.username}
                                         </Button>
@@ -143,10 +146,17 @@ export default function DefaultLayout() {
                                                 }
                                             }}
                                             anchorEl={anchorEl}
-                                            open={open}
+                                            open={menuOpen}
+                                            onClose={handleClose}
                                         >
                                             <MenuItem
-                                             onClick={handleLogout}
+                                                component={Link}
+                                                to={"/profile/" + user?.uuid}
+                                            >
+                                                Profile
+                                            </MenuItem>
+                                            <MenuItem
+                                                onClick={handleLogout}
                                             >
                                                 Logout
                                             </MenuItem>

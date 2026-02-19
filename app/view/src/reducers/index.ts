@@ -3,7 +3,7 @@ import { Action } from "../definitions/types";
 import { AuthState } from "../definitions/interfaces";
 export const authReducer = (state:AuthState, action:Action ) => 
 {
-    if("type" in action && "value" in action ){
+    if("type" in action || "value" in action ){
 
         switch(action.type) {
     
