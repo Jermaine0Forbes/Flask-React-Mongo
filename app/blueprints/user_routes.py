@@ -110,6 +110,8 @@ def signup():
 def login():
     json = request.json 
     schema = LoginSchema()
+    isMongo = current_app.config['MONGO_ON']
+    userMongo = UserM()
     if json is not None:
         try:
            
