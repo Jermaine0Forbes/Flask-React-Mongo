@@ -113,14 +113,20 @@ def login():
     isMongo = current_app.config['MONGO_ON']
     userMongo = UserM()
     if json is not None:
-        try:
-           
+        try: 
             user = schema.load(data = json)
             if isinstance(user, dict):
-                bcrypt = current_app.config['BCRYPT']
                 pswd = user.get("password")
-                hashed = bcrypt.generate_password_hash(pswd).decode('utf-8')
-                user.update({'password': hashed})
+                username = user['username']
+                if isMongo and userMongo.user_exists(username):
+                    bcrypt = current_app.config['BCRYPT']
+                    um = userMongo.get_creds(username)
+                    if  bcrypt.checkpw(pswd, um['password']):
+                        print("password is valid")
+                    else:
+                        abort(400, "password is invalid")
+                else:
+                    print('sql logic happening')
             return jsonify(user)
         except ValidationError as err:
             return jsonify(err.messages)

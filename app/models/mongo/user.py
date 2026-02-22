@@ -34,6 +34,13 @@ class User(Model):
         exclude = { 'password': 0}
         return self.get_by('uuid', uuid, exclude, True)
 
+    def get_creds(self, username: str) -> dict:
+        include = { "username": 1, "password": 1, "uuid": 1}
+        creds = self.get_by('username', username, include , True)
+        if isinstance(creds, dict) :
+            return creds
+        
+        raise Exception("Could not get user info")
         
     def update(self, data: dict):
         self.has_required(data)

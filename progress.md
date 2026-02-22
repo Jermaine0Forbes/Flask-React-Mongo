@@ -41,7 +41,7 @@
 - ~~create auth provider and reducer/context~~
 - ~~create profile link~~
 - ~~need to add logout functionality~~
-- add logic to login api
+- ~~add logic to login api~~
 - return jwt after successful login
 - need to add proper type hinting to context and reducer
 - need to refactor
