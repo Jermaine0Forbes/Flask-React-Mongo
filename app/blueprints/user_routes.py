@@ -9,7 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from ..models.sqlalchemy.user import User
 from ..models.mongo.user import User as UserM
-from ..config.utils import jwt_expired as expired
+from ..config.utils import jwt_expired as expired, jwt_encode
 
 user_bp = Blueprint('user', __name__)
 
@@ -115,19 +115,24 @@ def login():
     if json is not None:
         try: 
             user = schema.load(data = json)
+            um = None 
             if isinstance(user, dict):
                 pswd = user.get("password")
                 username = user['username']
+                
                 if isMongo and userMongo.user_exists(username):
                     bcrypt = current_app.config['BCRYPT']
                     um = userMongo.get_creds(username)
-                    if  bcrypt.checkpw(pswd, um['password']):
+                    if  bcrypt.check_password_hash( um['password'], pswd):
                         print("password is valid")
+                        encoded = jwt_encode(um, request, current_app)
+                        return jsonify({"jwt": encoded, "uuid": um["uuid"] })
                     else:
                         abort(400, "password is invalid")
                 else:
                     print('sql logic happening')
-            return jsonify(user)
+                    
+            abort(400, "something went wrong")
         except ValidationError as err:
             return jsonify(err.messages)
     else:
