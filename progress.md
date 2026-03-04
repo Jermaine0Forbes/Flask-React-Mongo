@@ -44,7 +44,16 @@
 - ~~add logic to login api~~
 - ~~return jwt after successful login~~
 - create roles and permissions for users
+- set and remove cookies during authentication
 - need to add proper type hinting to context and reducer
 - need to refactor
 - need to add test cases
 
+
+### 3-4-26
+
+- [flask principal](https://pythonhosted.org/Flask-Principal/)
+- [flask security: rbac](https://flask-security-too.readthedocs.io/en/stable/features.html#role-identity-based-access)
+- [flask: security considerations](https://flask.palletsprojects.com/en/stable/web-security/)
+- [flask - role based access control - geeksforgeeks](https://www.geeksforgeeks.org/python/flask-role-based-access-control/)
+- [mongoengine](https://pypi.org/project/mongoengine/)
