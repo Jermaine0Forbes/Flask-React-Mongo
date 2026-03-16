@@ -50,6 +50,10 @@
 - need to add test cases
 
 
+### 3-15-26
+
+[Introduction into flask principal](https://www.codersarts.com/post/flask-for-beginners-building-secure-and-scalable-web-apps-with-authentication-and-authorization)
+
 ### 3-7-26
 
 Deciding if I want to start over and create new flask app with all the extensions that are recommended to use flask security. At this moment, I think I'm going to try to implement Flask Principal and see if I can get a working example of prevent certain users from accessing certain endpoints. It's definitely going to take some time because in the last sessions I have not been coding I've just been reading docs.

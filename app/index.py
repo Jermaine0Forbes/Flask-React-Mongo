@@ -1,4 +1,5 @@
 from flask import request, render_template, Flask
+from flask_principal import Principal
 from markupsafe import escape 
 from .blueprints.user_routes import user_bp
 from .config.config import Config
@@ -12,6 +13,7 @@ from .models.mongo.db import init_mongo
 
 app = Flask(__name__, template_folder="view/build", static_folder="view/build/static")
 bcrypt = Bcrypt(app)
+principals = Principal(app)
 app.config.from_object(Config)
 app.secret_key = Config.SECRET_KEY
 app.config['BCRYPT'] = bcrypt

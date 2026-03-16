@@ -2,21 +2,17 @@
 A basic template to create a flask react app 
 
 
-## Need to install 
+## Update requirement.txt
+
+```
+pip freeze > requirements.txt
 
 ```
 
-pip install flask
+## To install packages
 
-pip install python-dotenv
-
-pip install mysql-connector
-
-pip install mysqlclient
-
-pip install marsmallow
-
-
+```
+pip install -r requirements.txt
 ```
 
 ## Activate the environment
